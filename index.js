@@ -278,7 +278,7 @@ function initThemes() {
     const activeTheme = themes[currentThemeIdx];
     document.documentElement.setAttribute("data-theme", activeTheme);
     
-    const label = activeTheme === "classic-dark" ? "MIDNIGHT GOLD" : "PLATINUM LIGHT";
+    const label = activeTheme === "classic-dark" ? "LUXE GOLD" : "ALABASTER LIGHT";
     themeName.textContent = label;
     showNotification(`THEME CONFIGURATION: ${label} ACTIVE`, "success");
   });
