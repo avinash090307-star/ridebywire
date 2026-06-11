@@ -278,7 +278,7 @@ function initThemes() {
     const activeTheme = themes[currentThemeIdx];
     document.documentElement.setAttribute("data-theme", activeTheme);
     
-    const label = activeTheme === "classic-dark" ? "CARBON BLACK" : "TITANIUM LIGHT";
+    const label = activeTheme === "classic-dark" ? "MIDNIGHT GOLD" : "PLATINUM LIGHT";
     themeName.textContent = label;
     showNotification(`THEME CONFIGURATION: ${label} ACTIVE`, "success");
   });
@@ -518,13 +518,34 @@ function initCartListeners() {
         showNotification("TRANSACTION ERROR: Cart is empty", "error");
         return;
       }
-      showNotification("PROCESSING SECURE CHECKOUT...", "success");
-      setTimeout(() => {
-        showNotification("TRANSACTION SUCCESSFUL: Receipt Generated", "success");
-        cart = [];
-        updateCartUI();
-        toggleCart();
-      }, 1500);
+      
+      let message = "*RIDEBYWIRE ORDER CHECKOUT*\n";
+      message += "--------------------------------------\n";
+      message += "I want to purchase the following gear/accessories:\n\n";
+      
+      let totalAmount = 0;
+      cart.forEach((item, index) => {
+        const itemTotal = item.price * item.qty;
+        totalAmount += itemTotal;
+        message += `${index + 1}. *${item.brand} - ${item.model}*\n`;
+        message += `   Qty: ${item.qty} | Price: ₹${item.price.toLocaleString("en-IN")} each\n`;
+        message += `   Total: ₹${itemTotal.toLocaleString("en-IN")}\n\n`;
+      });
+      
+      message += "--------------------------------------\n";
+      message += `*TOTAL PAYABLE:* ₹${totalAmount.toLocaleString("en-IN")}\n`;
+      message += "--------------------------------------\n";
+      message += "I would like to complete this payment via WhatsApp Pay. Please share the payment prompt.";
+
+      const waLink = `https://wa.me/919992228554?text=${encodeURIComponent(message)}`;
+      window.open(waLink, "_blank");
+
+      showNotification("REDIRECTING TO WHATSAPP PAYMENT DESK...", "success");
+
+      // Clear the cart and close drawer
+      cart = [];
+      updateCartUI();
+      toggleCart();
     });
   }
 }
@@ -1203,26 +1224,66 @@ function calculateInsurancePremium() {
 }
 
 function processInsuranceRenewalPayment() {
-  showNotification("CONNECTING TO SECURE GATEWAY...", "success");
+  const brand = document.getElementById("ins-brand").options[document.getElementById("ins-brand").selectedIndex].text;
+  const ccOption = document.getElementById("ins-cc").options[document.getElementById("ins-cc").selectedIndex].text;
+  const year = document.getElementById("ins-year").value;
+  const regNum = document.getElementById("ins-reg-no").value.toUpperCase();
+  const prevCompany = document.getElementById("ins-prev-company").options[document.getElementById("ins-prev-company").selectedIndex].text;
+  const ncb = document.getElementById("ins-ncb").options[document.getElementById("ins-ncb").selectedIndex].text;
   
-  setTimeout(() => {
-    const regNum = document.getElementById("ins-reg-no").value.toUpperCase();
-    const finalPremiumText = document.getElementById("ins-lbl-total").textContent;
-    const policyNum = "RBW/INS/" + Math.floor(10000 + Math.random() * 90000) + "/2026";
+  let selectedAddons = [];
+  if (document.getElementById("ins-addon-zero-dep").checked) selectedAddons.push("Zero Depreciation Cover");
+  if (document.getElementById("ins-addon-engine").checked) selectedAddons.push("Engine & Gearbox Protection");
+  if (document.getElementById("ins-addon-rsa").checked) selectedAddons.push("24/7 Roadside Assistance");
+  if (document.getElementById("ins-addon-consumables").checked) selectedAddons.push("Consumables Cover");
+  const addonsString = selectedAddons.length > 0 ? selectedAddons.join(", ") : "None";
 
-    document.getElementById("ins-success-policy-no").textContent = policyNum;
-    document.getElementById("ins-success-reg-no").textContent = regNum;
-    document.getElementById("ins-success-premium").textContent = finalPremiumText;
+  const basePremium = document.getElementById("ins-lbl-base").textContent;
+  const tp = document.getElementById("ins-lbl-tp").textContent;
+  const ncbVal = document.getElementById("ins-lbl-ncb-val").textContent;
+  const addonsVal = document.getElementById("ins-lbl-addons").textContent;
+  const gst = document.getElementById("ins-lbl-gst").textContent;
+  const finalPremiumText = document.getElementById("ins-lbl-total").textContent;
 
-    document.querySelectorAll(".wiz-step").forEach(s => s.classList.remove("active"));
-    document.getElementById("wiz-step-4").classList.add("active");
+  let message = "*RIDEBYWIRE INSURANCE RENEWAL REQUEST*\n";
+  message += "--------------------------------------\n";
+  message += `*Vehicle Brand:* ${brand}\n`;
+  message += `*Engine CC:* ${ccOption}\n`;
+  message += `*Registration Year:* ${year}\n`;
+  message += `*Registration No:* ${regNum}\n`;
+  message += `*Previous Insurer:* ${prevCompany}\n`;
+  message += `*NCB Discount:* ${ncb}\n`;
+  message += `*Add-ons Selected:* ${addonsString}\n`;
+  message += "--------------------------------------\n";
+  message += `*Base Premium:* ${basePremium}\n`;
+  message += `*Third Party Cover:* ${tp}\n`;
+  message += `*NCB Deduction:* ${ncbVal}\n`;
+  message += `*Add-ons Cover:* ${addonsVal}\n`;
+  message += `*GST (18%):* ${gst}\n`;
+  message += "--------------------------------------\n";
+  message += `*TOTAL NET PREMIUM:* ${finalPremiumText}\n`;
+  message += "--------------------------------------\n";
+  message += "I would like to pay this premium amount via WhatsApp Pay. Please dispatch the renewal payment prompt.";
 
-    document.querySelectorAll(".step-dot").forEach(dot => {
-      dot.classList.add("completed");
-    });
-    
-    showNotification("POLICY RENEWED SUCCESSFULLY", "success");
-  }, 1200);
+  const waLink = `https://wa.me/919992228554?text=${encodeURIComponent(message)}`;
+  window.open(waLink, "_blank");
+
+  showNotification("REDIRECTING TO WHATSAPP PAYMENT DESK...", "success");
+
+  // Load Step 4 Success screen locally
+  const policyNum = "RBW/INS/" + Math.floor(10000 + Math.random() * 90000) + "/2026";
+  document.getElementById("ins-success-policy-no").textContent = policyNum;
+  document.getElementById("ins-success-reg-no").textContent = regNum;
+  document.getElementById("ins-success-premium").textContent = finalPremiumText;
+
+  document.querySelectorAll(".wiz-step").forEach(s => s.classList.remove("active"));
+  document.getElementById("wiz-step-4").classList.add("active");
+
+  document.querySelectorAll(".step-dot").forEach(dot => {
+    dot.classList.add("completed");
+  });
+
+  showNotification("POLICY DRAFT SUBMITTED - CONFIRM IN WHATSAPP", "success");
 }
 
 function closeInsuranceModal() {
@@ -1319,11 +1380,11 @@ function initLeafletMap() {
 
   const marker = L.marker(rbwCoords).addTo(leafletMap);
   marker.bindPopup(`
-    <div style="font-family: var(--font-body); color: #0f0f12; line-height: 1.5; padding: 5px;">
-      <strong style="color: #ff334b; font-family: var(--font-display); font-size:14px; display:block; margin-bottom:4px;">RIDEBYWIRE Showroom</strong>
+    <div style="font-family: var(--font-body); color: var(--text-primary); line-height: 1.5; padding: 5px;">
+      <strong style="color: var(--accent-color); font-family: var(--font-display); font-size:14px; display:block; margin-bottom:4px;">RIDEBYWIRE Showroom</strong>
       Plot No. 13, Chhattarpur Main Rd,<br>
       New Delhi, Delhi 110074<br>
-      <a href="tel:9992228554" style="font-weight: 700; color: #ff334b; text-decoration: none; display:inline-block; margin-top:5px;">Call: 999-222-8554</a>
+      <a href="tel:9992228554" style="font-weight: 700; color: var(--accent-color); text-decoration: none; display:inline-block; margin-top:5px;">Call: 999-222-8554</a>
     </div>
   `).openPopup();
 }
