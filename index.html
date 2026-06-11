@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="classic-dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RideByWire | Premium Pre-Owned Superbikes & Gear</title>
+  <!-- SEO Tags -->
+  <meta name="description" content="RideByWire - Premier pre-owned superbikes showroom, performance accessories, MT helmets, and instant insurance renewal. Hand-selected quality, active community rides and meetups.">
+  <meta name="keywords" content="superbikes, pre-owned bikes, buy sell motorcycles, helmets, mt helmets, ride by wire, insurance renewal, ridebywire13">
+  <!-- Premium Modern Fonts (Space Grotesk & Inter) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+  <!-- Leaflet Map CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <!-- Ambient Glow Elements -->
+  <div class="glow-bg-1"></div>
+  <div class="glow-bg-2"></div>
+
+  <!-- Subtle Logo Background Watermark -->
+  <div class="luxe-bg-watermark">
+    <svg viewBox="0 0 200 200" width="100%" height="100%">
+      <circle cx="100" cy="100" r="95" fill="none" stroke="currentColor" stroke-width="2" opacity="0.3" />
+      <g stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.4">
+        <path d="M 45 105 C 38 60, 52 45, 75 48 C 95 50, 102 65, 98 85 L 94 98 L 75 104 Z" />
+        <path d="M 40 70 C 44 58, 62 58, 72 68 C 65 76, 48 76, 40 70 Z" fill="currentColor" />
+        <line x1="82" y1="92" x2="88" y2="88" stroke-width="2" />
+        <line x1="85" y1="96" x2="91" y2="92" stroke-width="2" />
+        <path d="M 45 105 C 42 108, 36 102, 38 95" />
+      </g>
+      <g font-family="'Space Grotesk', sans-serif" font-style="italic">
+        <text x="105" y="85" font-weight="900" font-size="22" fill="var(--accent-color)" opacity="0.5">RIDE</text>
+        <text x="105" y="105" font-weight="900" font-size="20" fill="currentColor" opacity="0.5">BY WIRE</text>
+      </g>
+      <text x="65" y="132" font-family="'Playfair Display', serif" font-style="italic" font-size="8.5" fill="currentColor" opacity="0.5">... we believe in quality</text>
+    </svg>
+  </div>
+
+  <!-- Premium Sticky Header -->
+  <header class="premium-header">
+    <div class="header-main">
+      <div class="logo-area">
+        <!-- Replicated Instagram Profile Logo -->
+        <svg class="logo-profile-pic" viewBox="0 0 200 200" width="48" height="48">
+          <circle cx="100" cy="100" r="95" fill="#000000" stroke="var(--accent-color)" stroke-width="3" />
+          <circle cx="100" cy="100" r="91" fill="none" stroke="url(#ig-gradient)" stroke-width="2" />
+          
+          <defs>
+            <linearGradient id="ig-gradient" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#f9ce34" />
+              <stop offset="50%" stop-color="#ee2a7b" />
+              <stop offset="100%" stop-color="#6228d7" />
+            </linearGradient>
+          </defs>
+
+          <!-- Helmet side profile -->
+          <g stroke="#ffffff" stroke-width="4.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M 42 110 C 35 60, 50 42, 76 46 C 96 48, 104 65, 100 88 L 95 102 L 72 108 Z" />
+            <path d="M 38 72 C 43 58, 62 58, 73 68 C 65 78, 46 78, 38 72 Z" fill="var(--accent-color)" stroke="var(--accent-color)" stroke-width="2" />
+            <line x1="82" y1="94" x2="88" y2="89" stroke="#ffffff" stroke-width="3.5" />
+            <line x1="85" y1="99" x2="91" y2="94" stroke="#ffffff" stroke-width="3.5" />
+            <path d="M 42 110 C 39 114, 32 107, 34 98" />
+          </g>
+          
+          <g font-family="'Space Grotesk', sans-serif" font-style="italic">
+            <text x="108" y="84" font-weight="900" font-size="24" fill="var(--accent-color)">RIDE</text>
+            <text x="108" y="104" font-weight="900" font-size="21" fill="#ffffff">BY WIRE</text>
+          </g>
+          <text x="62" y="132" font-family="'Playfair Display', serif" font-style="italic" font-size="9" fill="#ffffff">... we believe in quality</text>
+        </svg>
+      </div>
+      
+      <!-- Modern Navigation Menu -->
+      <nav class="premium-navbar">
+        <ul class="nav-tabs">
+          <li class="nav-tab active" data-tab="home">HOME</li>
+          <li class="nav-tab" data-tab="buy" id="nav-tab-buy">BUY SHOWROOM</li>
+          <li class="nav-tab" data-tab="sell">SELL MOTORCYCLE</li>
+          <li class="nav-tab" data-tab="about">ABOUT US</li>
+          <li class="nav-tab" data-tab="news">NEWS & EVENTS</li>
+          <li class="nav-tab admin-only" data-tab="admin" style="border: 1px dashed var(--accent-color); padding: 6px 12px; border-radius: 4px; color: var(--accent-color);">
+            🔒 OWNER DESK
+          </li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button class="btn btn-secondary btn-sm" id="btn-open-insurance">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+          INSURANCE
+        </button>
+        <button class="cart-trigger" id="btn-open-cart">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.9 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+          <span class="cart-count" id="cart-badge">0</span>
+        </button>
+        <button class="theme-toggle" id="theme-toggler" title="Switch Theme Mode">
+          <span class="theme-lbl">STYLE:</span>
+          <span class="theme-val" id="theme-name">CARBON BLACK</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Viewports Frame -->
+  <main class="premium-viewport-frame">
+    
+    <!-- SECTION: HOME -->
+    <section id="sec-home" class="viewport-section active">
+      <!-- Hero Product Showcase -->
+      <div class="hero-grid">
+        <div class="hero-details">
+          <div class="spec-tag">AUTHENTICATED SUPERBIKE GARAGE</div>
+          <h1 class="hero-title">CURATED PRE-OWNED<br><span class="highlight-text">SUPERBIKES</span></h1>
+          <p class="hero-desc">
+            We source, diagnose, and optimize high-performance superbikes. Backed by 10+ years of engineering calibration, we test every motorcycle to deliver race-track performance and absolute reliability.
+          </p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" onclick="switchTab('buy')">
+              VIEW SHOWROOM
+              <svg class="icon-arrow" viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+            </button>
+            <button class="btn btn-outline" onclick="switchTab('sell')">SELL MOTORCYCLE</button>
+          </div>
+        </div>
+
+        <div class="hero-render-area">
+          <div class="premium-showcase-card">
+            <div class="showcase-badge">FEATURED MOTORCYCLE</div>
+            <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&q=80&w=600" alt="Superbike Showcase" class="showcase-img">
+            <div class="showcase-caption">
+              <h3>KTM Duke 250 (2023)</h3>
+              <p>Odo: 10,800 km // 150-Point Checked</p>
+              <div class="showcase-price-row">
+                <span class="showcase-price">₹2,15,000</span>
+                <span class="view-tag">VIEW DETAILS &rarr;</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Core Services & Capabilities Grid -->
+      <div class="section-divider">
+        <span class="div-line"></span>
+        <span class="div-text">OUR SERVICE ECOSYSTEM</span>
+        <span class="div-line"></span>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card premium-card">
+          <div class="card-num">01</div>
+          <h3 class="service-title">150-Point Inspection</h3>
+          <p class="service-text">Every pre-owned motorcycle undergoes a detailed compression, chassis alignment, and diagnostics check by master mechanics.</p>
+        </div>
+        <div class="service-card premium-card">
+          <div class="card-num">02</div>
+          <h3 class="service-title">Electronic Throttle Tuning</h3>
+          <p class="service-text">We calibrate digital ride-by-wire throttles and map custom ECUs to eliminate response lag and optimize power bands.</p>
+        </div>
+        <div class="service-card premium-card">
+          <div class="card-num">03</div>
+          <h3 class="service-title">Helmets & Performance Accessories</h3>
+          <p class="service-text">Offering certified MT Helmets, crash protection systems, sliders, and exhaust guards to elevate your safety parameters.</p>
+        </div>
+        <div class="service-card premium-card">
+          <div class="card-num">04</div>
+          <h3 class="service-title">Insurance Solutions</h3>
+          <p class="service-text">Fast, fully digital insurance renewal. Calculate premiums, match customized quotes from top underwriters, and renew instantly.</p>
+        </div>
+      </div>
+
+      <!-- Media Showroom Viewport -->
+      <div class="section-divider">
+        <span class="div-line"></span>
+        <span class="div-text">COMMUNITY & GARAGE FEED</span>
+        <span class="div-line"></span>
+      </div>
+
+      <div class="media-viewport-header">
+        <p class="section-subtitle">Real captures from our physical garage and active weekend rides. Follow us on Instagram <a href="https://instagram.com/ridebywire13" target="_blank" class="ig-link">@ridebywire13</a>.</p>
+        <div class="media-tabs">
+          <button class="m-tab active" onclick="filterMedia('all')">ALL PHOTOS</button>
+          <button class="m-tab" onclick="filterMedia('garage')">SHOWROOM</button>
+          <button class="m-tab" onclick="filterMedia('rides')">COMMUNITY RIDES</button>
+        </div>
+      </div>
+
+      <div class="masonry-gallery" id="home-media-gallery">
+        <!-- Gallery cards populated by JS -->
+      </div>
+    </section>
+
+    <!-- SECTION: BUY -->
+    <section id="sec-buy" class="viewport-section">
+      <div class="catalog-control-panel">
+        <div class="catalog-filters">
+          <button class="filter-btn active" data-filter="all">ALL INVENTORY</button>
+          <button class="filter-btn" data-filter="bike">SUPERBIKES</button>
+          <button class="filter-btn" data-filter="helmet">HELMETS</button>
+          <button class="filter-btn" data-filter="accessory">ACCESSORIES</button>
+        </div>
+        <div class="search-box-container">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="inventory-search" placeholder="Search by brand, cc, model, helmet size..." class="tech-input">
+        </div>
+      </div>
+
+      <div class="catalog-grid" id="catalog-products-grid">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <!-- SECTION: SELL -->
+    <section id="sec-sell" class="viewport-section">
+      <div class="sell-dashboard">
+        <!-- Left Side: Interactive 15-Angle Status & Angle Image Reference Guide -->
+        <div class="sell-visual-panel premium-card">
+          <div class="tech-panel-header">
+            <span>ANGLE IMAGE REFERENCE GUIDE</span>
+            <span class="pulse-indicator"></span>
+          </div>
+          
+          <div class="bike-blueprint-container">
+            <!-- Active Angle Reference Viewport -->
+            <div class="reference-photo-panel" id="ref-photo-viewport">
+              <img id="ref-photo-img" src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&q=80&w=400" class="ref-bike-img" alt="Reference Angle">
+              <div class="ref-photo-caption" id="ref-photo-title">Angle 01: Front Profile (0° View)</div>
+              <p class="ref-photo-tip" id="ref-photo-tip-text">Align front wheel straight. Capture the entire front headlamp, forks, and indicators in center frame.</p>
+            </div>
+
+            <svg class="blueprint-upload-svg" viewBox="0 0 500 300">
+              <rect x="0" y="0" width="500" height="300" fill="none" stroke="currentColor" stroke-width="0.3" stroke-dasharray="3,3" />
+              <!-- Bike Silhouette -->
+              <path d="M120,200 C150,150 200,150 250,120 C300,100 350,110 400,180" fill="none" stroke="currentColor" stroke-width="2" opacity="0.08" />
+              <circle cx="150" cy="200" r="45" fill="none" stroke="currentColor" stroke-width="2" opacity="0.08" />
+              <circle cx="350" cy="200" r="45" fill="none" stroke="currentColor" stroke-width="2" opacity="0.08" />
+              
+              <!-- Hotspots for 15 Angles (Linked to checkboxes/uploads) -->
+              <g id="hotspot-group"></g>
+            </svg>
+
+            <!-- Text checklist showing status -->
+            <div class="checklist-grid" id="angle-checklist-container">
+              <!-- Checkboxes for 15 angles -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Submission Form -->
+        <div class="sell-form-panel premium-card">
+          <div class="tech-panel-header">VEHICLE SUBMISSION (PENDING ADMIN APPRAISAL)</div>
+          <form id="sell-bike-form" class="tech-form">
+            
+            <div class="form-row">
+              <div class="form-group autocomplete">
+                <label for="sell-brand" class="tech-label">Select Brand</label>
+                <input type="text" id="sell-brand" placeholder="e.g. KTM, Kawasaki, Triumph..." class="tech-input-luxe" required>
+                <div id="brand-autocomplete-list" class="autocomplete-items"></div>
+              </div>
+              <div class="form-group autocomplete">
+                <label for="sell-model" class="tech-label">Select Model</label>
+                <input type="text" id="sell-model" placeholder="e.g. Duke 390, Ninja 400..." class="tech-input-luxe" required disabled>
+                <div id="model-autocomplete-list" class="autocomplete-items"></div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="sell-year" class="tech-label">Year of Manufacture</label>
+                <select id="sell-year" class="tech-select" required>
+                  <option value="" disabled selected>Select Year</option>
+                  <option value="2026">2026</option>
+                  <option value="2025">2025</option>
+                  <option value="2024">2024</option>
+                  <option value="2023">2023</option>
+                  <option value="2022">2022</option>
+                  <option value="2021">2021</option>
+                  <option value="2020">2020</option>
+                  <option value="2019">2019</option>
+                  <option value="2018">2018</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="sell-odometer" class="tech-label">Odometer Reading (KM)</label>
+                <input type="number" id="sell-odometer" placeholder="e.g. 12500" class="tech-input-luxe" min="0" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="sell-price" class="tech-label">Expected Valuation (₹)</label>
+                <input type="number" id="sell-price" placeholder="e.g. 280000" class="tech-input-luxe" min="0" required>
+              </div>
+              <div class="form-group">
+                <label for="sell-owners" class="tech-label">Number of Owners</label>
+                <select id="sell-owners" class="tech-select" required>
+                  <option value="1">1st Owner</option>
+                  <option value="2">2nd Owner</option>
+                  <option value="3">3rd Owner</option>
+                  <option value="4">4+</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Checklist of potential damages/issues -->
+            <div class="form-group">
+              <label class="tech-label">Known Damages / Issues Statement</label>
+              <div class="damages-checkbox-grid">
+                <label class="tech-checkbox-label">
+                  <input type="checkbox" name="damage" value="scratches">
+                  <span>Minor Scratches / Scuffs</span>
+                </label>
+                <label class="tech-checkbox-label">
+                  <input type="checkbox" name="damage" value="dents">
+                  <span>Tank / Body Dents</span>
+                </label>
+                <label class="tech-checkbox-label">
+                  <input type="checkbox" name="damage" value="engine_sound">
+                  <span>Unusual Engine Noise</span>
+                </label>
+                <label class="tech-checkbox-label">
+                  <input type="checkbox" name="damage" value="electrical">
+                  <span>Electrical / Sensor Errors</span>
+                </label>
+                <label class="tech-checkbox-label">
+                  <input type="checkbox" name="damage" value="tyres">
+                  <span>Tyres Worn (&lt; 30% Tread)</span>
+                </label>
+                <label class="tech-checkbox-label">
+                  <input type="checkbox" name="damage" value="service">
+                  <span>Lapsed Service Schedule</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="sell-description" class="tech-label">Detailed Mechanical & Structural Report</label>
+              <textarea id="sell-description" rows="4" placeholder="Detail any aftermarket exhausts, crash protection, battery health, or specific scratches..." class="tech-textarea" required></textarea>
+            </div>
+
+            <!-- Upload Zone with AI Scan Status Overlay -->
+            <div class="form-group">
+              <label class="tech-label" id="upload-main-label">Upload Portfolio (Angle 01: Front Profile (0° View))</label>
+              <div class="file-upload-drag-zone" id="drag-zone">
+                <!-- AI Scanning Overlay -->
+                <div class="ai-scanning-overlay" id="ai-scan-layer">
+                  <div class="laser-bar"></div>
+                  <div class="scanner-status" id="ai-scan-text">SCANNING GEOMETRY...</div>
+                </div>
+
+                <div class="upload-icon" id="drag-icon">📸</div>
+                <div class="upload-text" id="drag-text">DRAG & DROP IMAGE FOR ANGLE 01</div>
+                <div class="upload-subtext" id="drag-subtext">or click to browse directories</div>
+                <input type="file" id="sell-images" accept="image/*" class="hidden-input-file">
+              </div>
+              <p class="field-desc">Note: To demonstrate image verification, the first file you upload will fail (rejected as a non-matching angle). The second try will succeed!</p>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block" id="btn-submit-listing" disabled>
+              SUBMIT FOR OWNER APPRAISAL (0/15 VERIFIED)
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: OWNER ADMIN DESK -->
+    <section id="sec-admin" class="viewport-section">
+      <div class="admin-dashboard-container">
+        <div class="tech-panel-header">
+          <span>PENDING TRADE-IN SUBMISSIONS & EVALUATIONS</span>
+          <span class="badge badge-accent" id="admin-pending-count">1 PENDING</span>
+        </div>
+        
+        <div class="admin-main-grid">
+          <!-- Left: Pending submissions list -->
+          <div class="admin-list-panel" id="admin-submissions-list">
+            <!-- Populated by JS -->
+          </div>
+
+          <!-- Right: Detailed Evaluation Workspace -->
+          <div class="admin-workspace-panel premium-card" id="admin-workspace-area">
+            <div class="workspace-empty-msg">
+              <h3>Select a pending submission from the left panel to begin structural valuation mapping.</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: ABOUT US -->
+    <section id="sec-about" class="viewport-section">
+      <div class="about-grid">
+        <div class="about-info-column">
+          <div class="spec-tag">ESTABLISHED SHOWROOM // DELHI</div>
+          <h2 class="section-title">ENGINEERED PERFORMANCE. AUTHENTICATED QUALITY.</h2>
+          <p class="about-paragraph">
+            RideByWire was established by premium motorcycle enthusiasts with over <strong>10 years of mechanical tuning and ECU calibration expertise</strong>. We operate with a strict code of quality, sourcing only clean superbikes and premium safety helmets.
+          </p>
+          <p class="about-paragraph">
+            Our multi-brand showroom specializes in KTM, Kawasaki, Triumph, Ducati, BMW, Royal Enfield, and Yamaha. We conduct thorough diagnostic checks and digital throttle calibrations on every machine before listing.
+          </p>
+          
+          <div class="contact-details-box premium-card">
+            <h3 class="box-title">DIRECT SHOWROOM CONTACT</h3>
+            <div class="contact-row">
+              <span class="contact-lbl">Hotline:</span>
+              <a href="tel:9992228554" class="contact-val highlight-val">999-222-8554</a>
+            </div>
+            <div class="contact-row">
+              <span class="contact-lbl">Instagram Handle:</span>
+              <a href="https://instagram.com/ridebywire13" target="_blank" class="contact-val highlight-val">@ridebywire13</a>
+            </div>
+            <div class="contact-row">
+              <span class="contact-lbl">Hours of Operation:</span>
+              <span class="contact-val">09:00 AM - 08:00 PM // Monday - Saturday</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-map-column">
+          <div class="tech-panel-header">SHOWROOM LOCATION COORDINATES</div>
+          <div id="map" class="map-viewport premium-card">
+            <!-- Leaflet Map renders here -->
+          </div>
+          <div class="map-coords-bar">
+            <span>Latitude: 28.5020° N</span>
+            <span>Longitude: 77.1770° E</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: NEWS & COMMUNITY -->
+    <section id="sec-news" class="viewport-section">
+      <div class="news-dashboard-grid">
+        <!-- Upcoming Rides Timeline -->
+        <div class="news-panel premium-card">
+          <div class="tech-panel-header">UPCOMING GROUP RIDES & MEETUPS</div>
+          <div class="timeline" id="rides-timeline">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- Giveaways & Active Contests -->
+        <div class="news-panel premium-card">
+          <div class="tech-panel-header">ACTIVE GEAR GIVEAWAYS & PROMOTIONS</div>
+          <div class="giveaway-container" id="giveaway-list">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Sidebar: Shopping Cart -->
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-header">
+      <span class="cart-title">YOUR SHOPPING CART</span>
+      <button class="close-btn" id="btn-close-cart">&times;</button>
+    </div>
+    <div class="cart-items" id="cart-items-container">
+      <!-- Items render here -->
+    </div>
+    <div class="cart-summary">
+      <div class="summary-row">
+        <span>Subtotal:</span>
+        <span id="cart-subtotal">₹0.00</span>
+      </div>
+      <div class="summary-row">
+        <span>Estimated tax:</span>
+        <span>Inclusive</span>
+      </div>
+      <div class="summary-row total-row">
+        <span>TOTAL AMOUNT:</span>
+        <span id="cart-total" class="highlight">₹0.00</span>
+      </div>
+      <button class="btn btn-primary btn-block" id="btn-checkout">PROCEED TO CHECKOUT</button>
+    </div>
+  </div>
+  <div class="drawer-overlay" id="cart-overlay"></div>
+
+  <!-- Modal: Insurance Renewal Portal (Multi-Step Form) -->
+  <div class="insurance-modal" id="insurance-modal">
+    <div class="modal-header">
+      <div class="header-title-group">
+        <span>BIKE INSURANCE RENEWAL PORTAL</span>
+      </div>
+      <button class="close-btn" id="btn-close-insurance">&times;</button>
+    </div>
+    
+    <div class="insurance-modal-body">
+      <!-- Steps Indicator -->
+      <div class="wizard-steps-indicator">
+        <div class="step-dot active" data-step="1"><span>01 // BIKE DETAILS</span></div>
+        <div class="step-dot" data-step="2"><span>02 // CLAIMS HISTORY</span></div>
+        <div class="step-dot" data-step="3"><span>03 // PREMIUM MATCH</span></div>
+        <div class="step-dot" data-step="4"><span>04 // DISPATCH CONFIRM</span></div>
+      </div>
+
+      <!-- Step Content Area -->
+      <div class="wizard-content" id="wizard-step-container">
+        
+        <!-- STEP 1: Bike Details -->
+        <div class="wiz-step active" id="wiz-step-1">
+          <h3 class="wiz-step-title">Enter Bike Specifications</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="ins-brand" class="tech-label">Select Manufacturer</label>
+              <select id="ins-brand" class="tech-select">
+                <option value="" disabled selected>Select Company</option>
+                <option value="ktm">KTM</option>
+                <option value="kawasaki">Kawasaki</option>
+                <option value="triumph">Triumph</option>
+                <option value="ducati">Ducati</option>
+                <option value="royal-enfield">Royal Enfield</option>
+                <option value="bmw">BMW Motorrad</option>
+                <option value="yamaha">Yamaha</option>
+                <option value="honda">Honda</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="ins-cc" class="tech-label">Engine Displacement (CC)</label>
+              <select id="ins-cc" class="tech-select">
+                <option value="" disabled selected>Select Engine CC</option>
+                <option value="150">100cc - 150cc</option>
+                <option value="250">151cc - 250cc</option>
+                <option value="400">251cc - 400cc</option>
+                <option value="650">401cc - 750cc</option>
+                <option value="1000">750cc - 1000cc+</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="ins-year" class="tech-label">Registration Year</label>
+              <select id="ins-year" class="tech-select">
+                <option value="" disabled selected>Select Year</option>
+                <option value="2026">2026 (New)</option>
+                <option value="2025">2025</option>
+                <option value="2024">2024</option>
+                <option value="2023">2023</option>
+                <option value="2022">2022</option>
+                <option value="2021">2021</option>
+                <option value="2020">2020</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="ins-reg-no" class="tech-label">Registration Number (e.g. DL-3C-AS-1234)</label>
+              <input type="text" id="ins-reg-no" placeholder="DL-3C-AS-1234" class="tech-input-luxe">
+            </div>
+          </div>
+          <div class="wizard-actions">
+            <div></div> <!-- Space helper -->
+            <button type="button" class="btn btn-primary" onclick="insNextStep(2)">PROCEED &rarr;</button>
+          </div>
+        </div>
+
+        <!-- STEP 2: Previous Insurer & Claim History -->
+        <div class="wiz-step" id="wiz-step-2">
+          <h3 class="wiz-step-title">Specify Previous Coverage & Add-ons</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="ins-prev-company" class="tech-label">Previous Underwriter</label>
+              <select id="ins-prev-company" class="tech-select">
+                <option value="icici">ICICI Lombard</option>
+                <option value="hdfc">HDFC ERGO</option>
+                <option value="bajaj">Bajaj Allianz</option>
+                <option value="reliance">Reliance General</option>
+                <option value="tata">Tata AIG</option>
+                <option value="none">Lapsed / No Policy</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="ins-ncb" class="tech-label">Previous No Claim Bonus (NCB %)</label>
+              <select id="ins-ncb" class="tech-select">
+                <option value="0">0% (Claimed last year)</option>
+                <option value="20">20% (1 claim-free year)</option>
+                <option value="25">25% (2 claim-free years)</option>
+                <option value="35">35% (3 claim-free years)</option>
+                <option value="50">50% (4+ claim-free years)</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="tech-label">Add-on Coverages</label>
+            <div class="damages-checkbox-grid">
+              <label class="tech-checkbox-label">
+                <input type="checkbox" id="ins-addon-zero-dep" value="zero_dep">
+                <span>Zero Depreciation Cover (+₹1,500)</span>
+              </label>
+              <label class="tech-checkbox-label">
+                <input type="checkbox" id="ins-addon-engine" value="engine_protect">
+                <span>Engine & Gearbox Protection (+₹1,200)</span>
+              </label>
+              <label class="tech-checkbox-label">
+                <input type="checkbox" id="ins-addon-rsa" value="rsa">
+                <span>24/7 Roadside Assistance (+₹500)</span>
+              </label>
+              <label class="tech-checkbox-label">
+                <input type="checkbox" id="ins-addon-consumables" value="consumables">
+                <span>Consumables Cover (+₹300)</span>
+              </label>
+            </div>
+          </div>
+          <div class="wizard-actions">
+            <button type="button" class="btn btn-outline" onclick="insPrevStep(1)">&larr; BACK</button>
+            <button type="button" class="btn btn-primary" onclick="insNextStep(3)">CALCULATE PREMIUM &rarr;</button>
+          </div>
+        </div>
+
+        <!-- STEP 3: Premium Summary & Invoice -->
+        <div class="wiz-step" id="wiz-step-3">
+          <h3 class="wiz-step-title">Premium Calculation Summary</h3>
+          
+          <div class="insurance-calculation-sheet premium-card">
+            <div class="sheet-row"><span>Own Damage Base Premium:</span><span id="ins-lbl-base">₹0.00</span></div>
+            <div class="sheet-row"><span>Third Party Liability:</span><span id="ins-lbl-tp">₹2,800.00</span></div>
+            <div class="sheet-row"><span>No Claim Bonus (NCB) Discount:</span><span id="ins-lbl-ncb-val" style="color: var(--accent-color)">-₹0.00</span></div>
+            <div class="sheet-row"><span>Selected Add-On Coverages:</span><span id="ins-lbl-addons">₹0.00</span></div>
+            <div class="sheet-row"><span>GST (18.00%):</span><span id="ins-lbl-gst">₹0.00</span></div>
+            <div class="sheet-divider"></div>
+            <div class="sheet-row total-row"><span>TOTAL NET PREMIUM:</span><span id="ins-lbl-total" class="highlight">₹0.00</span></div>
+          </div>
+
+          <div class="wizard-actions">
+            <button type="button" class="btn btn-outline" onclick="insPrevStep(2)">&larr; BACK</button>
+            <button type="button" class="btn btn-primary" onclick="insNextStep(4)">PAY & RENEW NOW</button>
+          </div>
+        </div>
+
+        <!-- STEP 4: Success & Dispatch Confirmation -->
+        <div class="wiz-step" id="wiz-step-4">
+          <div class="success-screen">
+            <div class="success-icon-cad">✓</div>
+            <h3 class="wiz-step-title" style="color: var(--accent-color);">POLICY RENEWED</h3>
+            <p class="success-desc">
+              Your insurance has been successfully processed. A digital copy of the policy docket and receipt has been sent to your registered contact.
+            </p>
+            <div class="policy-card premium-card">
+              <div class="p-row"><span>Policy No:</span><span id="ins-success-policy-no">RBW/INS/62534/2026</span></div>
+              <div class="p-row"><span>Vehicle Reg:</span><span id="ins-success-reg-no">DL-3C-XXXX</span></div>
+              <div class="p-row"><span>Expiry Date:</span><span>10-JUN-2027</span></div>
+              <div class="p-row"><span>Premium Paid:</span><span id="ins-success-premium" class="highlight">₹0.00</span></div>
+            </div>
+            <button type="button" class="btn btn-secondary" onclick="closeInsuranceModal()">CLOSE PORTAL</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="drawer-overlay" id="insurance-overlay"></div>
+
+  <!-- Notification System (Snackbar alerts) -->
+  <div id="notification-container" class="notification-area"></div>
+
+  <!-- Leaflet Map JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <!-- Main Script -->
+  <script src="index.js"></script>
+</body>
+</html>
